@@ -17,7 +17,7 @@ import java.util.Random;
 
 
 
-
+printf("Hello World");
 
 public class Graph {
 	HashMap<String,vertex> G;
