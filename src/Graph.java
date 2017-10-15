@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class Graph {
 	HashMap<String,vertex> G;
-	//HashMap<String[],ArrayList<String>> Bridge;
+
 	String [] T;
 	int number;
 	public void put(String S1,String S2)
