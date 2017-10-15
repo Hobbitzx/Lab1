@@ -50,7 +50,7 @@ public class Hello {
 				}
 				
 			}catch (Exception e1) {
-				//e1.printStackTrace();
+
 				flag = true;
 				System.out.println("Invalid input");
 			}              //读取输入的文件路径
