@@ -7,9 +7,16 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 
+
 //This is my second modify of Second Scene
 //This is my second modify of Second Scene
 //This is my second modify of Second Scene
+
+//This is my first modify of Second Scene
+//This is my first modify of Second Scene ,too
+
+
+
 
 
 public class Graph {
