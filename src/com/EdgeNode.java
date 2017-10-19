@@ -40,6 +40,7 @@ public class EdgeNode {
 		wight = 0;
 		this.toNode= realto;
 	}
+	/***/
 	public void addWight()
 	{
 		wight++;

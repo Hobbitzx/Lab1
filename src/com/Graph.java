@@ -8,11 +8,39 @@ import java.util.Map;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.util.Random;
 import java.util.Set;
 
 /**Graph*/
 public class Graph {
+	/**
+	 * 
+	 */
+	static private Logger logger;
+	
+	static {
+		try {
+        	logger = Logger.getLogger("log");
+    		final FileHandler fileHandler = new FileHandler("D:\\log.txt");
+    		fileHandler.setFormatter(new SimpleFormatter());
+    		logger.addHandler(fileHandler);
+    	} catch (IOException e) {
+			logger.info(e.getMessage());
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	private int tempint;
+	/**
+	 *
+	 */
+	private int countint;
 	/**
 	 * ghashmap
 	 */
@@ -52,8 +80,32 @@ public class Graph {
 	/**tempsa*/
 	private String[] tempsa;
 	/**templist*/
-	List<String> templist; 
+	private List<String> templist; 
 
+	/**
+	 * @return the tempint
+	 */
+	public final int getTempint() {
+		return tempint;
+	}
+	/**
+	 * @param tempint the tempint to set
+	 */
+	public final void setTempint(final int realtempint) {
+		this.tempint = realtempint;
+	}
+	/**
+	 * @return the countint
+	 */
+	public final int getCountint() {
+		return countint;
+	}
+	/**
+	 * @param countint the countint to set
+	 */
+	public final void setCountint(final int realcountint) {
+		this.countint = realcountint;
+	}
 	/**
 	 * @return the temps2
 	 */
@@ -82,12 +134,12 @@ public class Graph {
 	 * @return the tempsa
 	 */
 	public String[] getTempsa() {
-		return tempsa;
+		return tempsa.clone();
 	}
 	/**
 	 * @param tempsa the tempsa to set
 	 */
-	public void setTempsa(final String[] realtempsa) {
+	public void setTempsa(final String... realtempsa) {
 		this.tempsa = realtempsa;
 	}
 	/**
@@ -279,19 +331,18 @@ public class Graph {
 	public List<String> bridgeWords(final String word1, final String word2) {
 		final ArrayList<String> stringArray = new ArrayList<String>();
 		tempnode = ghashmap.get(word1);
-		if (ghashmap.get(word1) == null || ghashmap.get(word2) == null) {
-			return stringArray;
-		}
-		tempmap2 = tempnode.getEdgename();
-		tempset2 = tempmap2.entrySet();
-		final Iterator<Entry<String, EdgeNode>> iter = tempset2.iterator();// 对v的边进行遍历
-		while (iter.hasNext()) {
-			tempentry2 = iter.next();
-			tempedge = tempentry2.getValue();
-			tempnode = tempedge.getToNode();// newV是于V相连的顶点
+		if (ghashmap.get(word1) != null && ghashmap.get(word2) != null ){
 			tempmap2 = tempnode.getEdgename();
-			if (tempmap2.get(word2) != null) {
-				stringArray.add(tempnode.getText());
+			tempset2 = tempmap2.entrySet();
+			final Iterator<Entry<String, EdgeNode>> iter = tempset2.iterator();// 对v的边进行遍历
+			while (iter.hasNext()) {
+				tempentry2 = iter.next();
+				tempedge = tempentry2.getValue();
+				tempnode = tempedge.getToNode();// newV是于V相连的顶点
+				tempmap2 = tempnode.getEdgename();
+				if (tempmap2.get(word2) != null) {
+					stringArray.add(tempnode.getText());
+				}
 			}
 		}
 		return stringArray;
@@ -301,12 +352,12 @@ public class Graph {
 	public void dijkstra(final Vertex vtemp) {
 		vtemp.setDist(0);
 		for (;;) {
-			tempnode = findsmall();
-			if (tempnode == null) {
+			Vertex small = findsmall();
+			if (small == null) {
 				break;
 			}
-			tempnode.setKnow(1);
-			tempmap2 = tempnode.getEdgename();
+			small.setKnow(1);
+			tempmap2 = small.getEdgename();
 			tempset2 = tempmap2.entrySet();
 			tempiter2 = tempset2.iterator();
 			while (tempiter2.hasNext()) {
@@ -314,10 +365,10 @@ public class Graph {
 				tempedge = tempentry2.getValue();
 				tempnode = tempedge.getToNode();
 				if (tempnode.getKnow() == 0
-					&& tempnode.getDist() + tempedge.getWight() < tempnode.getDist()
-					| tempnode.getDist() == -1) {
-					tempnode.setDist(tempnode.getDist() + tempedge.getWight());
-					tempnode.setPnode(tempnode);
+					&& (small.getDist() + tempedge.getWight() < tempnode.getDist()
+					|| tempnode.getDist() == -1)) {
+					tempnode.setDist(small.getDist() + tempedge.getWight());
+					tempnode.setPnode(small);
 				}
 			}
 		}
@@ -327,12 +378,12 @@ public class Graph {
 		tempset = ghashmap.entrySet();
 		tempiter = tempset.iterator();// 对v的边进行遍历
 		Vertex small = null;
-		tempnode = tempentry.getValue();
 		int intdist = -1;
 		while (tempiter.hasNext()) {
 			tempentry = tempiter.next();
-			if (tempnode.getDist() != -1 & (intdist == -1 | tempnode.getDist() < intdist)
-					& tempnode.getKnow() == 0) {
+			tempnode = tempentry.getValue();
+			if (tempnode.getDist() != -1 && (intdist == -1 || tempnode.getDist() < intdist)
+					&& tempnode.getKnow() == 0) {
 				small = tempnode;
 				intdist = tempnode.getDist();
 			}
@@ -342,7 +393,7 @@ public class Graph {
 
 	/***/
 	public void randomWalk() throws IOException {
-		final Random ran = new Random();// 随机数
+		final Random ran = new Random();
 		final StringBuilder builder = new StringBuilder();
 		String[] string = new String[2];
 		final HashMap<EdgeNode, Integer> hashMap = new HashMap<EdgeNode, Integer>();// 一个边到整数的hashmap
@@ -355,48 +406,48 @@ public class Graph {
 		builder.append(tempnode.getText());
 		if (tempnode.getNumber() == 0) // 所选点中边的数量为0
 		{
-			System.out.println(tempnode.getText());
+			logger.info(tempnode.getText());
 			builder.append(tempnode.getText());
-			return;
 		}
-		rndint = ran.nextInt(100) % tempnode.getNumber();// 0到边数-1中选择一个数
-		tempmap2 = tempnode.getEdgename();
-		tempsa = tempnode.getTmap();
-		temps = tempsa[rndint];
-		tempedge = tempmap2.get(temps);// E为所选边
-		while (hashMap.get(tempedge) == null & tempnode.getNumber() != 0 & number != 0)
-		// 循环条件为 E没被选到 且所选点的边数都不为0
+		else
 		{
-			string[0] = tempnode.getText();// E中起点的字符串
-			tempnode = tempedge.getToNode();
-			string[1] = tempnode.getText();// E终点的字符串
-			builder.append(" " + string[1]);
-			hashMap.put(tempedge, 1);
-			tempnode = tempedge.getToNode();
-			if (tempnode.getNumber() == 0) {
-				temps = builder.toString();
-				temps = temps.trim();// 去掉首尾空格
-				System.out.println(temps);
-				final FileWriter fwr = new FileWriter("D:/test/text1.txt", true);
-				fwr.write(temps + "\rndint\n");
-				fwr.flush();
-				fwr.close();
-				return;
-			}
-			rndint = ran.nextInt(100) % tempnode.getNumber();
+			rndint = ran.nextInt(100) % tempnode.getNumber();// 0到边数-1中选择一个数
+			tempmap2 = tempnode.getEdgename();
+			tempsa = tempnode.getTmap();
 			temps = tempsa[rndint];
-			tempedge = tempmap2.get(temps);
+			tempedge = tempmap2.get(temps);// E为所选边
+			while (hashMap.get(tempedge) == null & tempnode.getNumber() != 0 & number != 0)
+			// 循环条件为 E没被选到 且所选点的边数都不为0
+			{
+				string[0] = tempnode.getText();// E中起点的字符串
+				tempnode = tempedge.getToNode();
+				string[1] = tempnode.getText();// E终点的字符串
+				builder.append(" " + string[1]);
+				hashMap.put(tempedge, 1);
+				tempnode = tempedge.getToNode();
+				if (tempnode.getNumber() == 0) {
+					temps = builder.toString();
+					temps = temps.trim();// 去掉首尾空格
+					logger.info(temps);
+					final FileWriter fwr = new FileWriter("E:\\text1.txt", true);
+					fwr.write(temps + "\rndint\n");
+					fwr.flush();
+					fwr.close();
+					return;
+				}
+				rndint = ran.nextInt(100) % tempnode.getNumber();
+				temps = tempsa[rndint];
+				tempedge = tempmap2.get(temps);
+			}
+			tempnode = tempedge.getToNode();
+			temps = " "+builder.toString();
+			temps = temps.trim();// 去掉首尾空格
+			logger.info(temps);
+			final FileWriter fwr = new FileWriter("E:\\text1.txt", true);
+			fwr.write(builder + "\r\n");
+			fwr.flush();
+			fwr.close();
 		}
-		tempnode = tempedge.getToNode();
-		builder.append(" " + tempnode.getText());
-		temps = builder.toString();
-		temps = temps.trim();// 去掉首尾空格
-		System.out.println(temps);
-		final FileWriter fwr = new FileWriter("D:/test/text1.txt", true);
-		fwr.write(builder + "\rndint\n");
-		fwr.flush();
-		fwr.close();
-
 	}
 
 	/***/
@@ -405,20 +456,20 @@ public class Graph {
 		dijkstra(ghashmap.get(word1));
 		tempnode = ghashmap.get(word2);
 		if (tempnode.getDist() == -1) {
-			System.out.println("不可达");
+			logger.info("不可达");
 			return;
 		}
 		print(ghashmap.get(word2));
-		System.out.println();
+		logger.info("");
 	}
 
 	/***/
 	public void print(final Vertex vertex) {
 		if (vertex.getPnode() != null) {
 			print(vertex.getPnode());
-			System.out.print("->");
+			logger.info("->");
 		}
-		System.out.print(vertex.getText());
+		logger.info(vertex.getText());
 	}
 
 	/***/
@@ -437,93 +488,93 @@ public class Graph {
 				continue;
 			}
 			print(tempnode);
-			System.out.println();
+			logger.info("");
 		}
 
 	}
 
 	/***/
 	public void queryBridgeWords(final String word1, final String word2) {
-		if (ghashmap.get(word1) != null & ghashmap.get(word2) != null) {
+		if (ghashmap.get(word1) != null && ghashmap.get(word2) != null) {
 			templist = bridgeWords(word1, word2);
 			if (templist.isEmpty()) {
-				System.out.println("No bridge words from \"" + word1 + "\" to \"" + word2 + "\"");
+				logger.info("No bridge words from \"" + word1 + "\" to \"" + word2 + "\"");
 			} else if (templist.size() == 1) {
-				System.out.print("The bridge word from \"" + word1 + "\" to \"" + word2 + "\" is: ");
-				System.out.println(templist.get(0));
+				if (logger.isLoggable(Level.INFO)) {
+					logger.info("The bridge word from \"" + word1 + "\" to \"" + word2 + "\" is: ");
+				}
+				logger.info(templist.get(0));
 			} else {
 				// 对v的边进行遍历
-				System.out.print("The bridge words from \"" + word1 + "\" to \"" + word2 + "\" are: ");
+				logger.info("The bridge words from \"" + word1 + "\" to \"" + word2 + "\" are: ");
 				for (int i = 0; i < templist.size(); i++) {
-					System.out.print(templist.get(i));
+					logger.info(templist.get(i));
 					if (i == templist.size() - 2) {
-						System.out.print(",");
+						logger.info(",");
 					} else if (i != templist.size() - 1) {
-						System.out.print(",");
+						logger.info(",");
 					}
 				}
-				System.out.println(".");
+				logger.info(".");
 			}
 
-		} else if (ghashmap.get(word1) == null & ghashmap.get(word2) == null) {
-			System.out.println("No \"" + word1 + "\" and \"" + word2 + "\" in the graph");
-			return;
+		} else if (ghashmap.get(word1) == null && ghashmap.get(word2) == null) {
+			logger.info("No \"" + word1 + "\" and \"" + word2 + "\" in the graph");
+			
 		} else if (ghashmap.get(word1) == null) {
-			System.out.println("No \"" + word1 + "\" in the graph");
-			return;
+			logger.info("No \"" + word1 + "\" in the graph");
+			
 		} else if (ghashmap.get(word2) == null) {
-			System.out.println("No \"" + word2 + "\" in the graph");
-			return;
-		} else {
-			return;
-		}
+			logger.info("No \"" + word2 + "\" in the graph");
+			
+		} 
 	}
 
 	/***/
 	public String generateNewText(final String inputText) {
+		tempint=1;
 		final Random ran = new Random();
 		temps = handleString(inputText);
 		tempsa = temps.split(" ");
 		final StringBuilder sbuild = new StringBuilder(temps);
-		int num = 0;
-		// System.out.println(tempsa.length);
-		if (tempsa.length > 1) {
+		countint = 0;
+		// logger.info(tempsa.length);
+		if (tempsa.length > tempint) {
 			for (int i = 0; i < tempsa.length - 1; i++)// 对v的边进行遍历
 			{
 				// queryBridgeWords(tempsa[i],tempsa[i+1]);
-				// System.out.println(tempsa[i+1]);
+				// logger.info(tempsa[i+1]);
 				temps = tempsa[i];
 				temps2 = tempsa[i + 1];
 				templist = bridgeWords(temps, temps2);
-				num += temps.length() + 1;
+				countint += temps.length() + 1;
 				if (templist.isEmpty()) {
 					continue;
 				} else {
 					final int mmm = templist.size();
-					// System.out.println(mmm);
+					// logger.info(mmm);
 					temps = templist.get(ran.nextInt(mmm)) + " ";
-					// System.out.println(Insert);
-					sbuild.insert(num, temps);
-					num += temps.length();
+					// logger.info(Insert);
+					sbuild.insert(countint, temps);
+					countint += temps.length();
 				}
 			}
 		}
-		System.out.println(sbuild.toString());
+		logger.info(sbuild.toString());
 		return sbuild.toString();
 
 	}
 
 	/***/
-	public static String handleString(final String string) {
+	public String handleString(final String string) {
 		// 负值字符集合，匹配非字母字符
-		String news = null;
-		news = string.replaceAll("[^a-zA-Z]", " "); // 将s中所有非字母字符换成空格
-		news = string.trim(); // 去掉首尾空格
-		news = string + " "; // 每行最后加一个空格
-		news = string.replaceAll("\\string{1,}", " ");
+		temps = string.replaceAll("[^a-zA-Z]", " "); // 将s中所有非字母字符换成空格
+		temps = temps.trim(); // 去掉首尾空格
+		temps = temps + " "; // 每行最后加一个空格
+		temps = temps.replaceAll("\\string{1,}", " ");
 		// 其中\s代表不可见字符（空格，制表符，换页符），\\s匹配\string，{1,}表示至少匹配1次。代表将多余的空格替换成一个空格
 
-		return news;
+		return temps;
 	}
 
 }

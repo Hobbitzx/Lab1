@@ -132,8 +132,8 @@ public class GraphViz {
 	 */
 	public GraphViz() {
 		if (GraphViz.osName.contains("Windows")) {
-			this.tempDir = "D:/test";
-			this.executable = "D:/Software/Graphviz/bin/dot.exe";
+			this.tempDir = "D:";
+			this.executable = "D:/Graphviz2.38/bin/dot.exe";
 		} else if (GraphViz.osName.equals("MacOSX")) {
 			this.tempDir = "/tmp";
 			this.executable = "/usr/local/bin/dot";

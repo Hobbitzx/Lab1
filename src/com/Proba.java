@@ -21,7 +21,7 @@ public class Proba {
 
 		String type = "png";
 		String repesentationType = "dot";
-		File out = new File("D:/test/out." + type); // Windows
+		File out = new File("E:/out." + type); // Windows
 		gv.writeGraphToFile(gv.getGraph(gv.getDotSource(),
 type, repesentationType), out);
 	}
