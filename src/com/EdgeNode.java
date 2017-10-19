@@ -9,7 +9,7 @@ public class EdgeNode {
 	 */
 	private Vertex toNode;
 	/**
-	 * Vertex 
+	 * vertex
 	 */
 	private int wight;
     /**get method*/

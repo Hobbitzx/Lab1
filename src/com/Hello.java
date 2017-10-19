@@ -130,12 +130,13 @@ public final class Hello {
 
 	/***/
 	public static String handleString(String string) {
-		String NotLetter = "[^a-zA-Z]";        //负值字符集合，匹配非字母字符
-		string=string.replaceAll(NotLetter," ");     //将s中所有非字母字符换成空格
-		string=string.trim();                        //去掉首尾空格
-		string=string+" ";                           //每行最后加一个空格
-		string=string.replaceAll("\\s{1,}", " ");    //其中\s代表不可见字符（空格，制表符，换页符），\\s匹配\string，{1,}表示至少匹配1次。代表将多余的空格替换成一个空格
-		string=string.toLowerCase();                 //将大写字母全部换成小写字母
+		String notLetter = "[^a-zA-Z]"; // 负值字符集合，匹配非字母字符
+		string = string.replaceAll(notLetter, " "); // 将s中所有非字母字符换成空格
+		string = string.trim(); // 去掉首尾空格
+		string = string + " "; // 每行最后加一个空格
+		string = string.replaceAll("\\s{1,}", " "); 
+// 其中\s代表不可见字符（空格，制表符，换页符），\\s匹配\string，{1,}表示至少匹配1次。代表将多余的空格替换成一个空格
+		string = string.toLowerCase(); // 将大写字母全部换成小写字母
 		return string;
 	}
 

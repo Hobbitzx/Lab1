@@ -21,7 +21,6 @@ public class Graph {
 	 * 
 	 */
 	static private Logger logger;
-	
 	static {
 		try {
         	logger = Logger.getLogger("log");
@@ -32,7 +31,6 @@ public class Graph {
 			logger.info(e.getMessage());
 		}
 	}
-	
 	/**
 	 * 
 	 */
@@ -80,7 +78,7 @@ public class Graph {
 	/**tempsa*/
 	private String[] tempsa;
 	/**templist*/
-	private List<String> templist; 
+private List<String> templist;
 
 	/**
 	 * @return the tempint
@@ -163,7 +161,7 @@ public class Graph {
 	/**
 	 * @param tempiter the tempiter to set
 	 */
-	public void setTempiter(final Iterator<Entry<String, Vertex>> realtempiter) {
+public void setTempiter(final Iterator<Entry<String, Vertex>> realtempiter){
 		this.tempiter = realtempiter;
 	}
 	/**
@@ -175,7 +173,7 @@ public class Graph {
 	/**
 	 * @param tempiter2 the tempiter2 to set
 	 */
-	public void setTempiter2(final Iterator<Entry<String, EdgeNode>> realtempiter2) {
+public void setTempiter2(final Iterator<Entry<String, EdgeNode>> realtempiter2){
 		this.tempiter2 = realtempiter2;
 	}
 	/**
@@ -187,7 +185,7 @@ public class Graph {
 	/**
 	 * @param tempentry2 the tempentry2 to set
 	 */
-	public void setTempentry2(final Entry<String, EdgeNode> realtempentry2) {
+public void setTempentry2(final Entry<String, EdgeNode> realtempentry2){
 		this.tempentry2 = realtempentry2;
 	}
 	/**
@@ -211,7 +209,7 @@ public class Graph {
 	/**
 	 * @param tempset2 the tempset2 to set
 	 */
-	public void setTempset2(final Set<Map.Entry<String, EdgeNode>> realtempset2) {
+public void setTempset2(final Set<Map.Entry<String, EdgeNode>> realtempset2){
 		this.tempset2 = realtempset2;
 	}
 	/***/
@@ -235,7 +233,7 @@ public class Graph {
 		return tempset;
 	}
 	/***/
-	public void setTempset(final Set<Map.Entry<String, Vertex>> realtempset) {
+public void setTempset(final Set<Map.Entry<String, Vertex>> realtempset){
 		this.tempset = realtempset;
 	}
 
@@ -317,7 +315,8 @@ public class Graph {
 	/***/
 	private void init() {
 		tempset=ghashmap.entrySet();
-		final Iterator<Entry<String, Vertex>> iter = tempset.iterator();// 对v的边进行遍历
+final Iterator<Entry<String, Vertex>> iter = tempset.iterator();
+// 对v的边进行遍历
 		while (iter.hasNext()) {
 			tempentry = iter.next();
 			tempnode = tempentry.getValue();
@@ -331,10 +330,11 @@ public class Graph {
 	public List<String> bridgeWords(final String word1, final String word2) {
 		final ArrayList<String> stringArray = new ArrayList<String>();
 		tempnode = ghashmap.get(word1);
-		if (ghashmap.get(word1) != null && ghashmap.get(word2) != null ){
+if (ghashmap.get(word1) != null && ghashmap.get(word2) != null ){
 			tempmap2 = tempnode.getEdgename();
 			tempset2 = tempmap2.entrySet();
-			final Iterator<Entry<String, EdgeNode>> iter = tempset2.iterator();// 对v的边进行遍历
+final Iterator<Entry<String, EdgeNode>> iter = tempset2.iterator();
+// 对v的边进行遍历
 			while (iter.hasNext()) {
 				tempentry2 = iter.next();
 				tempedge = tempentry2.getValue();
@@ -365,9 +365,9 @@ public class Graph {
 				tempedge = tempentry2.getValue();
 				tempnode = tempedge.getToNode();
 				if (tempnode.getKnow() == 0
-					&& (small.getDist() + tempedge.getWight() < tempnode.getDist()
+&& (small.getDist() + tempedge.getWight() < tempnode.getDist()
 					|| tempnode.getDist() == -1)) {
-					tempnode.setDist(small.getDist() + tempedge.getWight());
+tempnode.setDist(small.getDist() + tempedge.getWight());
 					tempnode.setPnode(small);
 				}
 			}

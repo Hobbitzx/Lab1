@@ -42,8 +42,6 @@ public class Vertex {
 	/**
 	 * tempnode
 	 */
-	
-	
 	/**get method*/
     public EdgeNode getTempnode() {
 		return tempnode;
