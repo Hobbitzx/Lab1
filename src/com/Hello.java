@@ -19,7 +19,7 @@ public final class Hello {
 	static {
 		try {
 			logger = Logger.getLogger("log");
-			final FileHandler fileHandler = new FileHandler("D:\\log.txt");
+			final FileHandler fileHandler = new FileHandler("E:\\log.txt");
 			fileHandler.setFormatter(new SimpleFormatter());
 			logger.addHandler(fileHandler);
 		} catch (IOException e) {
@@ -173,11 +173,12 @@ public final class Hello {
 			Entry<String, Vertex> entry = iter.next();
 			if (entry.getValue().getEdgename().isEmpty())
 				continue;
-			Iterator<Entry<String, EdgeNode>> it = entry.getValue().getEdgename().entrySet().iterator();
+			Iterator<Entry<String, EdgeNode>> it = 
+entry.getValue().getEdgename().entrySet().iterator();
 			while (it.hasNext()) {
 				Entry<String, EdgeNode> en = it.next();
 				gv.add(entry.getKey() + "->" + en.getKey());
-				gv.addln("[label=" + en.getValue().getWight() + "]");
+			gv.addln("[label=" + en.getValue().getWight() + "]");
 			}
 		}
 		gv.addln(gv.end_graph());
@@ -185,7 +186,7 @@ public final class Hello {
 		String type = "png";
 		String repesentationType = "dot";
 		File out = new File("E:\\out." + type); // Windows
-		gv.writeGraphToFile(gv.getGraph(gv.getDotSource(), type, repesentationType), out);
+gv.writeGraphToFile(gv.getGraph(gv.getDotSource(), type, repesentationType), out);
 	}
 
 	public static String input() {

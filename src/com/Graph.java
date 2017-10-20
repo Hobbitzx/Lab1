@@ -382,7 +382,7 @@ tempnode.setDist(small.getDist() + tempedge.getWight());
 		while (tempiter.hasNext()) {
 			tempentry = tempiter.next();
 			tempnode = tempentry.getValue();
-			if (tempnode.getDist() != -1 && (intdist == -1 || tempnode.getDist() < intdist)
+if (tempnode.getDist() != -1 && (intdist == -1 || tempnode.getDist() < intdist)
 					&& tempnode.getKnow() == 0) {
 				small = tempnode;
 				intdist = tempnode.getDist();
@@ -396,7 +396,7 @@ tempnode.setDist(small.getDist() + tempedge.getWight());
 		final Random ran = new Random();
 		final StringBuilder builder = new StringBuilder();
 		String[] string = new String[2];
-		final HashMap<EdgeNode, Integer> hashMap = new HashMap<EdgeNode, Integer>();// 一个边到整数的hashmap
+final HashMap<EdgeNode, Integer> hashMap = new HashMap<EdgeNode, Integer>();// 一个边到整数的hashmap
 		if (number == 0) {
 			return;
 		} // 图中点的数量为0直接返回（似乎可以加一句话）
@@ -411,12 +411,14 @@ tempnode.setDist(small.getDist() + tempedge.getWight());
 		}
 		else
 		{
-			rndint = ran.nextInt(100) % tempnode.getNumber();// 0到边数-1中选择一个数
+			rndint = ran.nextInt(100) % tempnode.getNumber();
+// 0到边数-1中选择一个数
 			tempmap2 = tempnode.getEdgename();
 			tempsa = tempnode.getTmap();
 			temps = tempsa[rndint];
 			tempedge = tempmap2.get(temps);// E为所选边
-			while (hashMap.get(tempedge) == null & tempnode.getNumber() != 0 & number != 0)
+			while (hashMap.get(tempedge) == null & 
+tempnode.getNumber() != 0 & number != 0)
 			// 循环条件为 E没被选到 且所选点的边数都不为0
 			{
 				string[0] = tempnode.getText();// E中起点的字符串
@@ -429,13 +431,13 @@ tempnode.setDist(small.getDist() + tempedge.getWight());
 					temps = builder.toString();
 					temps = temps.trim();// 去掉首尾空格
 					logger.info(temps);
-					final FileWriter fwr = new FileWriter("E:\\text1.txt", true);
+final FileWriter fwr = new FileWriter("E:\\text1.txt", true);
 					fwr.write(temps + "\rndint\n");
 					fwr.flush();
 					fwr.close();
 					return;
 				}
-				rndint = ran.nextInt(100) % tempnode.getNumber();
+rndint = ran.nextInt(100) % tempnode.getNumber();
 				temps = tempsa[rndint];
 				tempedge = tempmap2.get(temps);
 			}
