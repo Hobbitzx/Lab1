@@ -178,7 +178,7 @@ public class Hello {
 		System.out.println(gv.getDotSource());
 		String type = "png";
 		String repesentationType= "dot";
-		File out = new File("D:/test/out." + type);    // Windows
+		File out = new File("C:/users/hgdzx/desktop/test/out." + type);    // Windows
 		gv.writeGraphToFile( gv.getGraph(gv.getDotSource(), type, repesentationType), out );
 	}
 
