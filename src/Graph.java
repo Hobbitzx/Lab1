@@ -169,15 +169,17 @@ public class Graph {
 	void calcShortestPath(String word1,String word2)
 	{
 		init();
-		Dijkstra(G.get(word1));
-		if(G.get(word2).Dist==-1)
-		{
-			System.out.println("不可达");
-			return;
+			Dijkstra(G.get(word1));
+			if(G.get(word2).Dist==-1)
+			{
+				System.out.print("不可达");
+				return;
+			}
+			print(G.get(word2));
 		}
-		print(G.get(word2));
-		System.out.println();
-	}
+			
+		
+	
 	void print(vertex V)
 	{
 		if(V.P!=null)
@@ -190,22 +192,28 @@ public class Graph {
 	void calcShortestPath(String word)
 	{
 		init();
-		Dijkstra(G.get(word));
-		Iterator<Entry<String, vertex>> iter =G.entrySet().iterator();//对v的边进行遍历
-		while(iter.hasNext())
-		{
-			Entry<String,vertex> entry=iter.next();
-			if(entry.getValue().Dist==-1)
-			{
-				continue;
-			}
-			else if(entry.getKey().equals(word))
-			{
-				continue;
-			}
-			print(entry.getValue());
-			System.out.println();
+		if (G.get(word) == null) {
+			System.out.print("未输入单词，请重新选择功能\n");
 		}
+		else {
+			Dijkstra(G.get(word));
+			Iterator<Entry<String, vertex>> iter =G.entrySet().iterator();//对v的边进行遍历
+			while(iter.hasNext())
+			{
+				Entry<String,vertex> entry=iter.next();
+				if(entry.getValue().Dist==-1)
+				{
+					continue;
+				}
+				else if(entry.getKey().equals(word))
+				{
+					continue;
+				}
+				print(entry.getValue());
+				System.out.println();
+			}
+		}
+		
 		
 	}
 	void queryBridgeWords(String word1,String word2)
