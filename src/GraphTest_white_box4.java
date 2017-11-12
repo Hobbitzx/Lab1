@@ -8,10 +8,11 @@ import java.io.PrintStream;
 
 import org.junit.Test;
 
-public class GraphTest4 {
+public class GraphTest_white_box4 {
+
 	@Test
-	public void testCalcShortestPathString() {
-        Graph spGraph = new Graph();
+	public void testQueryBridgeWords() {
+Graph spGraph = new Graph();
 		
 		String file = "C:\\users\\hgdzx\\desktop\\test\\test.txt";
 		File filepath = new File(file);
@@ -47,9 +48,9 @@ public class GraphTest4 {
 		}
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(output));
-		spGraph.calcShortestPath("\n");
+		spGraph.queryBridgeWords("seek","out");
 		String Actual = output.toString();
-		String Expected = new String("未输入单词，请重新选择功能\n"); 
+		String Expected = new String("No bridge words from \"seek\" to \"out\""); 
 		assertEquals(Expected,Actual);
 		PrintStream originalOutputStream=System.out;
 		System.setOut(originalOutputStream);

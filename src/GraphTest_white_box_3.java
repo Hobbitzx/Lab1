@@ -8,11 +8,12 @@ import java.io.PrintStream;
 
 import org.junit.Test;
 
-public class GraphTest2 {
+public class GraphTest_white_box_3 {
 
 	@Test
-	public void testCalcShortestPathString() {
-		Graph spGraph2 = new Graph();
+	public void testQueryBridgeWords() {
+Graph spGraph = new Graph();
+		
 		String file = "C:\\users\\hgdzx\\desktop\\test\\test.txt";
 		File filepath = new File(file);
 		StringBuilder result = new StringBuilder();
@@ -40,30 +41,20 @@ public class GraphTest2 {
 		String processed=result.toString();       
 		String[] s1 = processed.split(" ");
 		vertex V=new vertex(s1[0]);
-		spGraph2.G.put(s1[0], V);
+		spGraph.G.put(s1[0], V);
 		for(int i=0;i<s1.length-1;i++)
 		{
-			spGraph2.put(s1[i], s1[i+1]);    
+			spGraph.put(s1[i], s1[i+1]);    
 		}
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(output));
-		spGraph2.calcShortestPath("to");
+		spGraph.queryBridgeWords("zx","cyk");
 		String Actual = output.toString();
-		String Expected = new String("to->explore->strange->new\r\n" + 
-				"to->explore->strange->new->worlds\r\n" + 
-				"to->explore\r\n" + 
-				"to->explore->strange->new->life->and\r\n" + 
-				"to->explore->strange->new->civilizations\r\n" + 
-				"to->seek\r\n" + 
-				"to->explore->strange\r\n" + 
-				"to->explore->strange->new->life\r\n" + 
-				"to->seek->out\r\n" +
-				""); 
+		String Expected = new String("No \"cyk\" in the graph"); 
 		assertEquals(Expected,Actual);
 		PrintStream originalOutputStream=System.out;
 		System.setOut(originalOutputStream);
 		System.out.print(Actual);
-		
 	}
 
 }

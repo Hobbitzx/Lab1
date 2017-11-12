@@ -8,12 +8,11 @@ import java.io.PrintStream;
 
 import org.junit.Test;
 
-public class GraphTest {	
-	
+public class GraphTest_white_box2 {
+
 	@Test
-	public void testCalcShortestPathStringString() {
-		
-		Graph spGraph = new Graph();
+	public void testQueryBridgeWords() {
+Graph spGraph = new Graph();
 		
 		String file = "C:\\users\\hgdzx\\desktop\\test\\test.txt";
 		File filepath = new File(file);
@@ -49,17 +48,13 @@ public class GraphTest {
 		}
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(output));
-		spGraph.calcShortestPath("to","out");
+		spGraph.queryBridgeWords("cyk","zx");
 		String Actual = output.toString();
-		String Expected = new String("to->seek->out"); 
+		String Expected = new String("No \"cyk\" in the graph"); 
 		assertEquals(Expected,Actual);
 		PrintStream originalOutputStream=System.out;
 		System.setOut(originalOutputStream);
 		System.out.print(Actual);
-		
 	}
+
 }
-
-
-
-

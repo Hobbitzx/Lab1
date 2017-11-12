@@ -147,7 +147,7 @@ public class Graph {
 			{String m = M.toString();
 				m=m.trim();//去掉首尾空格
 				System.out.println(m);
-				FileWriter fw = new FileWriter("D:/test/text1.txt",true);
+				FileWriter fw = new FileWriter("C:/users/hgdzx/desktop/test/randomwalk.txt",true);
 				fw.write(m+"\r\n");
 				fw.flush();
 				fw.close();
@@ -160,7 +160,7 @@ public class Graph {
 		String m = M.toString();
 		m=m.trim();//去掉首尾空格
 		System.out.println(m);
-		FileWriter fw = new FileWriter("D:/test/text1.txt",true);
+		FileWriter fw = new FileWriter("C:/users/hgdzx/desktop/test/randomwalk.txt",true);
 		fw.write(m+"\r\n");
 		fw.flush();
 		fw.close();
@@ -224,12 +224,12 @@ public class Graph {
 			StringArray=BridgeWords(word1, word2);
 			if(StringArray.isEmpty())
 			{
-				System.out.println("No bridge words from \"" + word1 + "\" to \"" + word2 + "\"");
+				System.out.print("No bridge words from \"" + word1 + "\" to \"" + word2 + "\"");
 			}
 			else if(StringArray.size()==1)
 			{
 				System.out.print("The bridge word from \""+ word1+ "\" to \"" +word2 +"\" is: ");
-				System.out.println(StringArray.get(0));
+				System.out.print(StringArray.get(0));
 			}
 			else
 			{
@@ -238,26 +238,26 @@ public class Graph {
 				for(int i=0;i<StringArray.size();i++)
 				{
 					System.out.print(StringArray.get(i));
-					if(i==StringArray.size()-2) System.out.print(",");
+					if(i==StringArray.size()-2) System.out.print(" and ");
 					else if(i!=StringArray.size()-1) System.out.print(",");
 				}
-				System.out.println(".");
+				System.out.print(".");
 			}
 			
 		}
 		else if(G.get(word1)==null & G.get(word2)==null)
 		{
-			System.out.println("No \"" + word1 + "\" and \"" + word2 + "\" in the graph");
+			System.out.print("No \"" + word1 + "\" and \"" + word2 + "\" in the graph");
 			return;
 		}
 		else if(G.get(word1)==null)
 		{
-			System.out.println("No \"" + word1 + "\" in the graph");
+			System.out.print("No \"" + word1 + "\" in the graph");
 			return;
 		}
 		else if(G.get(word2)==null)
 		{
-			System.out.println("No \"" + word2 +"\" in the graph");
+			System.out.print("No \"" + word2 +"\" in the graph");
 			return;
 		}
 		else

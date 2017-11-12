@@ -8,10 +8,10 @@ import java.io.PrintStream;
 
 import org.junit.Test;
 
-public class GraphTest3 {
+public class GraphTest_white_box {
 
 	@Test
-	public void testCalcShortestPathStringString() {
+	public void testQueryBridgeWords() {
 Graph spGraph = new Graph();
 		
 		String file = "C:\\users\\hgdzx\\desktop\\test\\test.txt";
@@ -48,9 +48,9 @@ Graph spGraph = new Graph();
 		}
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(output));
-		spGraph.calcShortestPath("civilizations","new");
+		spGraph.queryBridgeWords("hobbit","cyk");
 		String Actual = output.toString();
-		String Expected = new String("²»¿É´ï"); 
+		String Expected = new String("No \"hobbit\" and \"cyk\" in the graph"); 
 		assertEquals(Expected,Actual);
 		PrintStream originalOutputStream=System.out;
 		System.setOut(originalOutputStream);
