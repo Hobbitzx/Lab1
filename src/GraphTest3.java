@@ -1,20 +1,16 @@
 import static org.junit.Assert.*;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintStream;
-
 import org.junit.Test;
-
-public class GraphTest_white_box4 {
-
+public class GraphTest3 {
 	@Test
-	public void testQueryBridgeWords() {
+	public void testCalcShortestPathStringString() {
 Graph spGraph = new Graph();
 		
-		String file = "C:\\users\\hgdzx\\desktop\\test\\test_white_box.txt";
+		String file = "C:\\users\\hgdzx\\desktop\\test\\test_black_box.txt";
 		File filepath = new File(file);
 		StringBuilder result = new StringBuilder();
 		try{
@@ -48,13 +44,12 @@ Graph spGraph = new Graph();
 		}
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(output));
-		spGraph.queryBridgeWords("seek","out");
+		spGraph.calcShortestPath("civilizations","new");
 		String Actual = output.toString();
-		String Expected = new String("No bridge words from \"seek\" to \"out\""); 
+		String Expected = new String("²»¿É´ï"); 
 		assertEquals(Expected,Actual);
 		PrintStream originalOutputStream=System.out;
 		System.setOut(originalOutputStream);
 		System.out.print(Actual);
 	}
-
 }

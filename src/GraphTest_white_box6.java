@@ -14,7 +14,7 @@ public class GraphTest_white_box6 {
 	public void testQueryBridgeWords() {
 Graph spGraph = new Graph();
 		
-		String file = "C:\\users\\hgdzx\\desktop\\test\\test.txt";
+		String file = "C:\\users\\hgdzx\\desktop\\test\\test_white_box.txt";
 		File filepath = new File(file);
 		StringBuilder result = new StringBuilder();
 		try{
