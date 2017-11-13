@@ -1,0 +1,22 @@
+﻿测试用例编号,输入数据,期望的输出,所覆盖的基本路径编号,,
+1,"hobbit
+cyk
+","No ""hobbit"" and ""cyk"" in the graph",,,1
+2,"cyk
+zx
+","No ""cyk"" in the graph",,,2
+3,"zx
+cyk
+","No ""cyk"" in the graph",,,3
+4,"seek
+out
+","No bridge words from ""seek"" to ""out""",,,4
+5,"life
+new
+","The bridge word from ""life"" to ""new"" is: and",,,5
+6,"to
+out
+","The bridge words from ""to"" to ""out"" are: zx and seek.",,,6
+7,"more
+how
+","The bridge words from ""more"" to ""how"" are: testx,testy and testz.",,,7

@@ -1,0 +1,16 @@
+﻿测试用例编号,输入字符串,期望输出字符串,所覆盖的等价类编号
+1,to,"to->explore->strange->new
+to->explore->strange->new->worlds
+to->explore
+to->explore->strange->new->life->and
+to->explore->strange->new->civilizations
+to->seek
+to->explore->strange
+to->explore->strange->new->life
+to->seek->out
+",(1)、(8)
+2,"to
+out",to->seek->out,(2)、(4)、(6)
+3,"civilizations
+new",不可达,(5)
+4,,未输入单词，请重新选择功能,(3)
