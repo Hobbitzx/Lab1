@@ -1,22 +1,41 @@
+
 public class Edge {
-	vertex to;
-	int wight;
-	
-	public Edge(vertex _to)
+	private Vertex toNode;
+	/**
+	 * vertex
+	 */
+	private int wight;
+    /**get method*/
+	public Vertex getToNode(){//get
+		return toNode;
+	}
+
+	/**set method*/
+	public void setToNode(final Vertex realto) {//set
+		this.toNode = realto;
+	}
+
+
+    /**get method*/
+	public int getWight() {//get
+		return wight;
+	}
+
+
+	/**set method*/
+	public void setWight(final int realwight) {//set
+		this.wight = realwight;
+	}
+
+
+    /**构造函数*/
+	public Edge(final Vertex realto) {//构造函数
+		wight = 0;
+		this.toNode= realto;
+	}
+	/***/
+	public void addWight()
 	{
-		wight=0;
-		to=_to;
+		wight++;
 	}
 }
-
-
-//This my first modify of First Scene
-
-//This is my second modify of Second Scene
-
-//This is first modify of Second Scene
-
-
-
-//This is my third modify of Second Scene
-
